@@ -12,8 +12,7 @@ A small, two-container development environment for ESPHome projects:
 > in the docs to make things concrete. Point the setup at any ESPHome project placed
 > under `workspace/`.
 
-Full documentation lives in the **[wiki](https://github.com/fotovlieger/ESPHOME_OpenCode/wiki)**
-(sources in [`wiki/`](wiki/)).
+Full documentation lives in the **[wiki](https://github.com/fotovlieger/ESPHOME_OpenCode/wiki)**.
 
 ## How it works
 
@@ -78,8 +77,7 @@ Then ask the agent to build or flash your ESPHome project.
 ├── toolchain/
 │   ├── Dockerfile          # Ubuntu + esphome venv
 │   └── entrypoint.sh       # sshd, key install, USB serial node watcher
-├── workspace/              # your ESPHome project(s) go here (not tracked)
-└── wiki/                   # documentation (GitHub wiki sources)
+└── workspace/              # your ESPHome project(s) go here (not tracked)
 ```
 
 ## Security
