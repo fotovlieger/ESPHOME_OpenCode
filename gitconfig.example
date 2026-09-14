@@ -1,0 +1,10 @@
+# Copy to .gitconfig/.gitconfig and fill in your identity.
+# Mounted read-only into the opencode container.
+#
+# The credential helper turns $GITHUB_TOKEN (from .env) into HTTPS auth,
+# so no credentials are ever written to disk.
+[credential]
+    helper = "!f() { echo username=x-access-token; echo password=$GITHUB_TOKEN; }; f"
+[user]
+    name = Your Name
+    email = you@example.com

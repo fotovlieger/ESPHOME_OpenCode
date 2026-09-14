@@ -1,0 +1,76 @@
+services:
+
+  opencode:
+      build:
+        context: ./opencode
+
+      container_name: opencode
+
+      user: "1000:1000"
+
+      environment:
+        - HOME=/home/opencode
+        - GITHUB_TOKEN=${GITHUB_TOKEN}
+        - GH_TOKEN=${GITHUB_TOKEN}
+        - GIT_AUTHOR_NAME=${GIT_AUTHOR_NAME}
+        - GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL}
+        - GIT_COMMITTER_NAME=${GIT_AUTHOR_NAME}
+        - GIT_COMMITTER_EMAIL=${GIT_AUTHOR_EMAIL}
+
+      working_dir: /workspace
+
+      volumes:
+        - ./workspace:/workspace
+        - opencode-home:/home/opencode
+
+        # Git auth via token (reads $GITHUB_TOKEN, nothing written to disk)
+        - ./.gitconfig/.gitconfig:/home/opencode/.gitconfig:ro
+
+        # SSH key voor verbinding met toolchain
+        - ./ssh/id_ed25519:/home/opencode/.ssh/id_ed25519:ro
+        - ./ssh/id_ed25519.pub:/home/opencode/.ssh/id_ed25519.pub:ro
+
+      networks:
+        - espdev
+
+      depends_on:
+        - toolchain
+
+      stdin_open: true
+      tty: true
+
+  toolchain:
+    build:
+      context: ./toolchain
+
+    container_name: esp-toolchain
+
+    working_dir: /workspace
+
+    volumes:
+      - ./workspace:/workspace
+      - esphome-data:/root/.esphome
+
+      # Public key van OpenCode
+      - ./ssh/id_ed25519.pub:/tmp/opencode_id_ed25519.pub:ro
+
+    networks:
+      - espdev
+
+    # ESP32 USB
+
+    device_cgroup_rules:
+      - 'c 188:* rmw'
+      - 'c 166:* rmw'
+
+    stdin_open: true
+    tty: true
+
+networks:
+  espdev:
+    driver: bridge
+
+
+volumes:
+  opencode-home:
+  esphome-data:

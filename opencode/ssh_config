@@ -1,0 +1,5 @@
+Host toolchain
+    HostName esp-toolchain
+    User toolchain
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null

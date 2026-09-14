@@ -1,0 +1,13 @@
+# Secrets / local-only configuration
+.env
+.gitconfig/.gitconfig
+ssh/id_*
+ssh/*.pub
+aaa
+
+# ESPHome project secrets and build artifacts
+secrets.yaml
+.esphome/
+*.bin
+__pycache__/
+*.pyc
