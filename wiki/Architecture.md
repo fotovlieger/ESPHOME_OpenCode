@@ -1,7 +1,7 @@
 # Architecture
 
 The environment deliberately splits **orchestration** from **execution** into two
-containers that share one workspace.
+containers that share one workspace (developemnt area).
 
 ## Why two containers?
 
